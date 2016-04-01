@@ -1,0 +1,39 @@
+﻿  Source.cpp
+Source.cpp(112): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(171): warning C4101: 'point' : unreferenced local variable
+Source.cpp(284): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(288): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(343): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(349): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(352): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(372): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(402): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(408): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(446): warning C4258: 'i' : definition from the for loop is ignored; the definition from the enclosing scope is used
+          Source.cpp(435) : definition of 'i' ignored
+          Source.cpp(398) : definition of 'i' used
+Source.cpp(464): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(466): warning C4129: '.' : unrecognized character escape sequence
+Source.cpp(554): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(566): warning C4129: '.' : unrecognized character escape sequence
+Source.cpp(567): warning C4129: '.' : unrecognized character escape sequence
+Source.cpp(604): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(606): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(639): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(643): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(683): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(692): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(703): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(711): warning C4129: '.' : unrecognized character escape sequence
+Source.cpp(714): warning C4129: '.' : unrecognized character escape sequence
+Source.cpp(717): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(951): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(961): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(978): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(980): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(1038): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(1040): warning C4018: '<' : signed/unsigned mismatch
+Source.cpp(1002): warning C4101: 'category' : unreferenced local variable
+  Generating code
+  Finished generating code
+  Console.vcxproj -> C:\Users\Дмитрий\Desktop\Console\Release\Console.exe

@@ -1,0 +1,31 @@
+﻿  Source.cpp
+c:\users\дмитрий\desktop\console\console\source.cpp(109): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(165): warning C4101: 'point' : unreferenced local variable
+c:\users\дмитрий\desktop\console\console\source.cpp(278): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(282): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(337): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(343): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(346): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(366): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(396): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(402): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(440): warning C4258: 'i' : definition from the for loop is ignored; the definition from the enclosing scope is used
+          c:\users\дмитрий\desktop\console\console\source.cpp(429) : definition of 'i' ignored
+          c:\users\дмитрий\desktop\console\console\source.cpp(392) : definition of 'i' used
+c:\users\дмитрий\desktop\console\console\source.cpp(458): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(460): warning C4129: '.' : unrecognized character escape sequence
+c:\users\дмитрий\desktop\console\console\source.cpp(548): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(560): warning C4129: '.' : unrecognized character escape sequence
+c:\users\дмитрий\desktop\console\console\source.cpp(561): warning C4129: '.' : unrecognized character escape sequence
+c:\users\дмитрий\desktop\console\console\source.cpp(598): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(600): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(633): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(637): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(677): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(686): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(697): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(705): warning C4129: '.' : unrecognized character escape sequence
+c:\users\дмитрий\desktop\console\console\source.cpp(708): warning C4129: '.' : unrecognized character escape sequence
+c:\users\дмитрий\desktop\console\console\source.cpp(711): warning C4018: '<' : signed/unsigned mismatch
+c:\users\дмитрий\desktop\console\console\source.cpp(942): warning C4018: '<' : signed/unsigned mismatch
+  Console.vcxproj -> C:\Users\Дмитрий\Desktop\Console\Debug\Console.exe
