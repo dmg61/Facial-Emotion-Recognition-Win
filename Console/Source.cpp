@@ -21,6 +21,7 @@ wstring emotionLabels = L"C:\\Users\\ִלטענטי\\Desktop\\Emotion_labels\\Emotion";
 wstring emotionImgs = L"C:\\Users\\ִלטענטי\\Desktop\\extended-cohn-kanade-images\\cohn-kanade-images";
 wstring emotionSort = L"C:\\Users\\ִלטענטי\\Desktop\\extended-cohn-kanade-images\\Emotion";
 wstring emotionTest = L"C:\\Users\\ִלטענטי\\Desktop\\extended-cohn-kanade-images\\Test";
+wstring emotionNormalized = L"C:\\Users\\ִלטענטי\\Desktop\\extended-cohn-kanade-images\\Normalized";
 
 const int countEmotion = 8;
 
@@ -58,14 +59,16 @@ void markingVideo();
 
 string classEmotion[8] = {"Angry", "Contempt", "Disgust", "Fear", "Happy", "Sorrow", "Surprise", "Neutral"};
 
+void allocationFaceComponent(Mat imgName, string fileName, string outFileName);
+
 int main()
 { 
 	detector = get_frontal_face_detector();
 	deserialize("C:\\Users\\ִלטענטי\\Desktop\\dlib-18.18\\shape_predictor_68_face_landmarks.dat") >> sp;
 
 
-	//SortAndLandmarkImgs();
-	//return 0;
+	SortAndLandmarkImgs();
+	return 0;
 
 	Ptr<cv::ml::ANN_MLP> model = Algorithm::load<cv::ml::ANN_MLP>("ANN_dist_4layers.yml");
 	std::vector<float> distances;
@@ -492,8 +495,64 @@ void SortAndLandmarkImgs()
 	full_object_detection shape;
 	array2d<rgb_pixel> img;
 	std::locale loc("rus");
-	std::string tmpPath, csvTmp;
+	std::string tmpPath, csvTmp, tmpFileName;
 	std::vector<dlib::rectangle> dets;
+
+	deserialize("C:\\Users\\ִלטענטי\\Desktop\\dlib-18.18\\shape_predictor_68_face_landmarks.dat") >> sp;
+	Mat imgM;
+	for (int i = 1; i < 9; i++)
+	{
+		//getAllFilesInDir(csvPath + L"C:\\Users\\ִלטענטי\\Desktop\\extended-cohn-kanade-images\\Test\\" + std::to_wstring(i), allLabels);
+		getAllFilesInDir(emotionTest + L"\\" + std::to_wstring(i), allLabels);
+
+		int countImg = 0;
+		for (int j = 0; j < allLabels.size(); ++j)
+		{
+			if (allLabels[j].find(L".png") != std::string::npos)
+			{
+				parseName = parseFileName(allLabels[j]);
+				//srcFullPathImg = emotionSort + L"\\" + std::to_wstring(category) + L"\\" + parseName[3] + L"\.png";;
+				/*destFullPathImg = emotionTest + L"\\" + std::to_wstring(i) + L"\\" + parseName[3] + L"_flip.png";
+
+				string tmp = wstringToString(allLabels[j], loc);
+
+				imgM = imread(tmp);
+				cv::flip(imgM, imgM, 1);
+
+				tmp = wstringToString(destFullPathImg, loc);
+				imwrite(tmp, imgM);*/
+
+				size_t indexType = allLabels[j].find_last_of(L".");
+
+				wstring fileName = allLabels[j].substr(0, indexType);
+				
+				srcFullPathImg = emotionImgs + L"\\" + parseName[0] + L"\\" + parseName[1] + L"\\" + parseName[3] + L"\.png";
+				destFullPathImg = emotionNormalized + L"\\" + std::to_wstring(i);
+				csvPath = emotionSort + L"\\" + std::to_wstring(i) + L"\\" + parseName[3];// + L"\.csv";
+				csvPath = parseName[3] + L".png";
+
+				tmpPath = wstringToString(allLabels[j], loc);
+				csvTmp = wstringToString(destFullPathImg, loc);
+				tmpFileName = wstringToString(csvPath, loc);
+
+				imgM = imread(tmpPath);
+
+				allocationFaceComponent(imgM, tmpFileName, csvTmp);
+
+				cout << j << "/" << allLabels.size() << "\r";
+				
+				countImg++;
+			}
+				
+
+			//continue;
+		}
+
+		allLabels.clear();
+
+		cout << "Class: " << i << " images: " << countImg << endl;
+	}
+	return;
 
 	//deserialize("C:\\Users\\ִלטענטי\\Desktop\\dlib-18.18\\shape_predictor_68_face_landmarks.dat") >> sp;
 	//Mat imgM;
@@ -842,7 +901,7 @@ std::vector<wstring> parseFileName(wstring fullfileName)
 	parseFileName.push_back(fileName.substr(0, 4));
 	parseFileName.push_back(fileName.substr(5, 3));
 	parseFileName.push_back(fileName.substr(9, 8));
-	parseFileName.push_back(fileName.substr(0, 17));
+	parseFileName.push_back(fileName.substr(0, fileName.find_last_of('.')));
 
 	return parseFileName;
 }
@@ -1067,4 +1126,117 @@ int main1()
 	_getch();
 	
 	return 0;
+}
+
+void allocationFaceComponent(Mat imgName, string imgFileName, string outFileName)
+{
+	frontal_face_detector detector = get_frontal_face_detector();
+	//shape_predictor sp;
+	full_object_detection shape;
+	array2d<rgb_pixel> img;
+	std::vector<dlib::rectangle> dets;
+	Mat cvImg;
+	std::vector<Point2f> points;
+
+	//deserialize("C:\\Users\\ִלטענטי\\Desktop\\dlib-18.18\\shape_predictor_68_face_landmarks.dat") >> sp;
+
+	cvImg = imgName;//imread(imgName);
+	assign_image(img, cv_image<bgr_pixel>(cvImg));
+	dets = detector(img);
+
+	for (int i = 0; i < dets.size(); ++i)
+	{
+		shape = sp(img, dets[i]);
+
+		for (int j = 0; j < shape.num_parts(); ++j)
+			points.push_back(Point(shape.part(j).x(), shape.part(j).y()));
+
+		string dirFace = outFileName + "\\Face\\" + imgFileName;
+		string dirEye = outFileName + "\\Eye\\" + imgFileName;
+		string dirMouth = outFileName + "\\Mouth\\" + imgFileName;
+		string dirNose = outFileName + "\\Nose\\" + imgFileName;
+
+		Mat eye, nose, mouth;
+		std::vector<Point2f> tmp_point;
+
+		for (int i = 48; i <= 67; i++)
+			tmp_point.push_back(points[i]);
+
+		mouth = cvImg(boundingRect(tmp_point));
+		tmp_point.clear();
+
+		for (int i = 27; i <= 35; i++)
+			tmp_point.push_back(points[i]);
+
+		nose = cvImg(boundingRect(tmp_point));
+		tmp_point.clear();
+
+		for (int i = 17; i <= 21; i++)
+			tmp_point.push_back(points[i]);
+		for (int i = 22; i <= 26; i++)
+			tmp_point.push_back(points[i]);
+		for (int i = 36; i <= 41; i++)
+			tmp_point.push_back(points[i]);
+		for (int i = 42; i <= 47; i++)
+			tmp_point.push_back(points[i]);
+
+		eye = cvImg(boundingRect(tmp_point));
+		tmp_point.clear();
+
+		
+		imwrite(dirEye, eye);
+		imwrite(dirMouth, mouth);
+		imwrite(dirNose, nose);
+
+		cv::RotatedRect rRect = cv::minAreaRect(points);
+		rRect.size = rRect.size;
+		Point2f vertices[4];
+		std::map<float, Point2f> tmp;
+		float angle;
+
+		rRect.points(vertices);
+		for (int i = 0; i < 4; ++i)
+		{
+			//line(cvImg, vertices[i], vertices[(i + 1) % 4], Scalar(0, 255, 0));
+			//cout << vertices[i];
+
+			angle = innerAngle(vertices[i], points[27], points[30]);
+
+			//cout << angle << endl;
+
+			tmp.insert(std::pair<float, Point2f>(angle, vertices[i]));
+		}
+
+		{
+			int i = 0;
+			for (auto rec : tmp)
+				vertices[i++] = rec.second;
+		}
+
+		float w = lengthLine(vertices[0], vertices[1]); // (pow(vertices[0].x - vertices[1].x, 2) + pow(vertices[0].y - vertices[1].y, 2));
+		float h = lengthLine(vertices[0], vertices[3]); //sqrt(pow(vertices[0].x - vertices[3].x, 2) + pow(vertices[0].y - vertices[3].y, 2));
+		Mat face(h, w, cvImg.type());
+		Point2f dvertices[4] = { Point2f(0, 0), Point2f(w, 0), Point2f(w, h), Point2f(0, h) };
+
+		Mat M = cv::getPerspectiveTransform(vertices, dvertices);
+		cv::warpPerspective(cvImg, face, M, face.size());
+
+		assign_image(img, cv_image<bgr_pixel>(face));
+		shape = sp(img, dlib::rectangle(h, w));
+		points.clear();
+
+		for (int j = 0; j < shape.num_parts(); ++j)
+		{
+			float x = shape.part(j).x() > w ? w : (shape.part(j).x() < 0 ? 0 : shape.part(j).x());
+			float y = shape.part(j).y() > h ? h : (shape.part(j).y() < 0 ? 0 : shape.part(j).y());
+			points.push_back(Point2f(x, y));
+			//cv::circle(face, points[j], 2, Scalar(50, 0, 255));
+		}
+
+		imwrite(dirFace, face);
+	}
+
+	//
+
+	//imshow("Rectangle", cvImg);
 }
